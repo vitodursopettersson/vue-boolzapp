@@ -202,8 +202,8 @@ createApp({
         },
         searchContact(searchContactKey) {
 
-            if (searchContactKey !== '') {
-                this.contactsFiltered = this.contacts.filter((contact) => contact.name.toLowerCase().includes(searchContactKey.toLowerCase()))
+            if (searchContactKey.trim() !== '') {
+                this.contactsFiltered = this.contacts.filter((contact) => contact.name.toLowerCase().includes(searchContactKey.trim().toLowerCase()))
                 return this.contactsFiltered
 
             } else {

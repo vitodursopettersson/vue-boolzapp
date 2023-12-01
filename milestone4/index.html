@@ -117,10 +117,10 @@
                 <!-- User -->
                 <div class="user">
                     <div class="user__avatar">
-                        <img :src="contacts[currentContacts].avatar" alt="avatar_1">
+                        <img :src="searchContact(searchContactKey)[currentContacts].avatar" alt="avatar_1">
                     </div>
                     <div class="user__info">
-                        <h3 v-text="contacts[currentContacts].name"></h3>
+                        <h3 v-text="searchContact(searchContactKey)[currentContacts].name"></h3>
                         <h6>Ultimo accesso oggi alle 12:00</h6>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
 
                 <!-- Chat Bubble Item -->
                 <div v-for="message in searchContact(searchContactKey)[currentContacts].messages"
-                    :class="{ 'chat-bubble--sent': message.st<atus === 'sent'}" class="chat-bubble">
+                    :class="{ 'chat-bubble--sent': message.status === 'sent'}" class="chat-bubble">
                     <p v-text="message.message"></p>
                     <span>11:10</span>
                 </div>
