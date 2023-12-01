@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolzapp</title>
+
+    <!-- Link Google Fonts Lato -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Link FontAwesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- App Javascript -->
+    <div id="app" class="app-container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <!-- Header Sidebar -->
+            <header>
+
+                <!-- Account -->
+                <div class="user my-account">
+                    <div class="user__avatar">
+                        <img src="img/avatar_1.jpg" alt="avatar_1">
+                    </div>
+                    <h3>Nome Utente</h3>
+                </div>
+
+                <!-- Group Icon -->
+                <div class="group-icon">
+                    <i class="fa-solid fa-circle-notch"></i>
+                    <i class="fa-solid fa-message"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+
+            </header>
+
+            <!-- Notification -->
+            <div class="notification">
+
+                <!-- Icon -->
+                <div class="notification__icon">
+                    <i class="fa-solid fa-bell-slash"></i>
+                </div>
+
+                <!-- Text -->
+                <div class="notification__text">
+                    <h3>Ricevi notifiche di nuovi messaggi</h3>
+                    <a href="">Attiva notifiche desktop</a>
+                </div>
+
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-bar">
+
+                <div class="search-bar--group">
+                    <div class="search-bar__icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchContactKey"
+                        v-on:keyup="searchContact">
+                </div>
+            </div>
+
+            <!-- Chat List -->
+            <ul class="chat-list">
+
+                <!-- User Chat-->
+                <li v-for="(contactElement, index) in contacts" :class="{'current-chat': index === currentContacts}"
+                    @click="setCurrentContacts(index)">
+
+                    <!-- User Info-->
+                    <div class="user">
+                        <div class="user__avatar">
+                            <img :src="contactElement.avatar" alt="avatar_1">
+                        </div>
+                        <div class="user__info">
+                            <h3 v-text="contactElement.name"></h3>
+                            <h6 v-text="contactElement.messages[0].message"></h6>
+                        </div>
+                    </div>
+
+                    <!-- Message Info -->
+                    <div class="user__chat-time">
+                        <span>12:00</span>
+                    </div>
+
+                </li>
+
+
+
+            </ul>
+
+
+
+        </div>
+
+        <!-- Main -->
+        <main class="main-container">
+
+            <!-- Header Main -->
+            <header>
+
+                <!-- User -->
+                <div class="user">
+                    <div class="user__avatar">
+                        <img :src="contacts[currentContacts].avatar" alt="avatar_1">
+                    </div>
+                    <div class="user__info">
+                        <h3 v-text="contacts[currentContacts].name"></h3>
+                        <h6>Ultimo accesso oggi alle 12:00</h6>
+                    </div>
+                </div>
+
+                <!-- Group Icon -->
+                <div class="group-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-paperclip"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+
+            </header>
+
+            <!-- Chat Main -->
+            <div class="chat-container">
+
+                <!-- Chat Bubble Item -->
+                <div v-for="message in contacts[currentContacts].messages"
+                    :class="{ 'chat-bubble--sent': message.status === 'sent'}" class="chat-bubble">
+                    <p v-text="message.message"></p>
+                    <span>11:10</span>
+                </div>
+
+            </div>
+
+            <!-- Chat input -->
+            <div class="chat-input">
+                <div class="chat-input__icon">
+                    <i class="fa-regular fa-face-smile"></i>
+                </div>
+                <div class="chat-input__input">
+                    <input type="text" placeholder="Scrivi un messaggio">
+                </div>
+                <div class="chat-input__icon">
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Link Vue Js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Link Javascript -->
+    <script src="main.js"></script>
+
+</body>
+
+</html>
